@@ -7,16 +7,16 @@ import (
 	beego "github.com/beego/beego/v2/server/web"
 )
 
-type RegisterController struct {
+type LoginController struct {
 	beego.Controller
 }
 
-func (c *RegisterController) Get() {
-	c.TplName = "register.html"
+func (c *LoginController) Get() {
+	c.TplName = "login.html"
 
 }
 
-func (c *RegisterController) Post() {
+func (c *LoginController) Post() {
 	name := c.GetString("name")
 	pwd := c.GetString("pwd")
 
@@ -28,11 +28,16 @@ func (c *RegisterController) Post() {
 	user := models.User{}
 	user.Name = name
 	user.Pwd = pwd
-	_, err := orm.Insert(&user)
+	err := orm.Read(&user)
 	if err != nil {
 		logs.Info(err.Error())
 	}
-	c.Data["data"] = "注册成功"
-	c.TplName = "hello.html"
+	//设置session
+	err = c.SetSession(user.Name, 1)
+	if err != nil {
+		logs.Info("session设置失败")
+	}
+	c.Data["data"] = user.Name
+	c.TplName = "internal.html"
 
 }
