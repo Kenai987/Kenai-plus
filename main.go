@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "Kenai-plus/models"
 	_ "Kenai-plus/routers"
 	beego "github.com/beego/beego/v2/server/web"
 )
@@ -8,4 +9,3 @@ import (
 func main() {
 	beego.Run()
 }
-
