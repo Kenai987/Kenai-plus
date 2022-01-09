@@ -5,6 +5,7 @@ go 1.16
 require github.com/beego/beego/v2 v2.0.1
 
 require (
+	github.com/go-sql-driver/mysql v1.5.0
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-cmp v0.5.6 // indirect
 	github.com/mitchellh/mapstructure v1.4.3 // indirect
